@@ -1,6 +1,7 @@
 pub mod simple;
 
 
+
 #[cfg(test)]
 mod tests {
     use simple::SimpleThrottler;
@@ -8,10 +9,10 @@ mod tests {
 
     #[test]
     fn simple_test() {
-        let mut s = SimpleThrottler::new(1000, Duration::new(1, 0));
+        let mut s = SimpleThrottler::new(100, Duration::new(1, 0));
         let mut i = 0;
 
-        while i < 10000 {
+        while i < 300 {
             s.wait();
             println!("{}", i);
             i += 1;
