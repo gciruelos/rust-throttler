@@ -1,2 +1,3 @@
 # rust-throttler
-throttler written in rust
+Simple throttler written in Rust.
+
