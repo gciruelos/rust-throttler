@@ -1,0 +1,6 @@
+[package]
+name = "throttler"
+version = "0.1.0"
+authors = ["gciruelos <gonzalo.ciruelos@gmail.com>"]
+
+[dependencies]
