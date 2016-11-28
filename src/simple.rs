@@ -27,7 +27,9 @@ impl SimpleThrottler {
     /// use throttler::simple::SimpleThrottler;
     /// use std::time::Duration;
     /// 
-    /// let throttler = SimpleThrottler::new(1000, Duration::new(1, 0));
+    /// // Create a SimpleThrottler that allows 1000 operations every 20
+    /// // seconds.
+    /// let throttler = SimpleThrottler::new(1000, Duration::new(20, 0));
     /// ```
     pub fn new(operations_per_interval: u64, time_interval: time::Duration)
         -> SimpleThrottler {
@@ -50,7 +52,9 @@ impl SimpleThrottler {
     /// use throttler::simple::SimpleThrottler;
     /// use std::time::Duration;
     /// 
+    /// // Create a throttler that allows 3 operations every second.
     /// let mut throttler = SimpleThrottler::new(3, Duration::new(1, 0));
+    /// 
     /// // This will print all numbers from 0 to 10 in bursts of 3.
     /// for i in 0..10 {
     ///     throttler.wait();
@@ -61,15 +65,15 @@ impl SimpleThrottler {
         let curr_interval = time::Instant::now()
             .duration_since(self.last_interval);
         if curr_interval > self.interval {
-            self.restart();
+            self.reset();
         } else if self.times_left == 0 {
             thread::sleep(self.interval - curr_interval);
-            self.restart();
+            self.reset();
         }
         self.times_left -= 1;
     }
 
-    /// Restarts the throttler completely. After calling `restart` the throttler
+    /// Resets the throttler completely. After calling `reset` the throttler
     /// is restored to its initial state, like after the `new` call.
     /// 
     /// # Examples
@@ -78,16 +82,17 @@ impl SimpleThrottler {
     /// use throttler::simple::SimpleThrottler;
     /// use std::time::Duration;
     /// 
+    /// // Create a 
     /// let mut throttler = SimpleThrottler::new(3, Duration::new(1, 0));
     /// // This will print all numbers from 0 to 10 together, because the
-    /// // throttler always gets restarted.
+    /// // throttler always gets reseted.
     /// for i in 0..10 {
     ///     throttler.wait();
     ///     println!("{}", i);
-    ///     throttler.restart()
+    ///     throttler.reset()
     /// }
     /// ```
-    pub fn restart(&mut self) {
+    pub fn reset(&mut self) {
         self.times_left = self.times;
         self.last_interval = time::Instant::now()
     }
