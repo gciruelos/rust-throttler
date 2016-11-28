@@ -14,7 +14,7 @@ It has just a really simple and easy to use throttler struct right now, but fanc
 The following example creates a throttler that allows 4 operations every 
 second, and uses it to print the time 10 times.
 
-```
+```rust
 use throttler::simple::SimpleThrottler;
 use std::time::{Duration, Instant};
 
