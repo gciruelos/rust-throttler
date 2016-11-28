@@ -19,8 +19,7 @@ impl SimpleThrottler {
         }
     }
     pub fn wait(&mut self) {
-        let curr_interval = time::Instant::now()
-            .duration_since(self.last_interval_);
+        let curr_interval = time::Instant::now().duration_since(self.last_interval_);
         if curr_interval > self.interval_ {
             self.restart();
         } else if self.times_left_ == 0 {
@@ -29,7 +28,7 @@ impl SimpleThrottler {
         }
         self.times_left_ -= 1;
     }
-    
+
     pub fn restart(&mut self) {
         self.times_left_ = self.times_;
         self.last_interval_ = time::Instant::now()
