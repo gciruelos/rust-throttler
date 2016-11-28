@@ -1,6 +1,6 @@
 [package]
 name = "throttler"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["gciruelos <gonzalo.ciruelos@gmail.com>"]
 repository = "https://github.com/gciruelos/rust-throttler.git"
 homepage = "https://github.com/gciruelos/rust-throttler"

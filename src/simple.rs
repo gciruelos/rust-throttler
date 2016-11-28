@@ -1,5 +1,13 @@
+//! This module contains the `SimpleThrottler` struct, that allows easy-to-use
+//! throttling.
+
 use std::{thread, time};
 
+
+/// `SimpleThrottler` is a struct that has a number of operations allowed per 
+/// time interval and the length of the inverval. It also stores the number of
+/// operations left to do in the current iterval, and when did the current
+/// interval start.
 pub struct SimpleThrottler {
     times: u64,
     interval: time::Duration,
