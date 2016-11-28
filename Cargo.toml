@@ -2,5 +2,6 @@
 name = "throttler"
 version = "0.1.0"
 authors = ["gciruelos <gonzalo.ciruelos@gmail.com>"]
+repository = "https://github.com/gciruelos/rust-throttler.git"
 
 [dependencies]
