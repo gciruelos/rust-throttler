@@ -1,9 +1,10 @@
 # rust-throttler
 Simple throttler for Rust.
 
-[![Build Status][ci-img]][ci]
-[![Crates.io version][crate-img]][crate]
-[![Documentation][docs-img]][docs]
+[![Crate Version](https://img.shields.io/crates/v/throttler.svg)](https://crates.io/crates/throttler)
+[![Build Status](https://travis-ci.org/gciruelos/rust-throttler.svg?branch=master)](https://travis-ci.org/gciruelos/rust-throttler)
+[![Documentation](https://docs.rs/throttler/badge.svg)](https://docs.rs/throttler)
+
 
 It has just a really simple and easy to use throttler struct right now, but fancier ones will be added in the future.
 
