@@ -1,11 +1,11 @@
 use std::{thread, time};
 
 pub struct SimpleThrottler {
-    times_: u64,
-    interval_: time::Duration,
+    times: u64,
+    interval: time::Duration,
 
-    times_left_: u64,
-    last_interval_: time::Instant,
+    times_left: u64,
+    last_interval: time::Instant,
 }
 
 impl SimpleThrottler {
@@ -21,13 +21,14 @@ impl SimpleThrottler {
     /// 
     /// let throttler = SimpleThrottler::new(1000, Duration::new(1, 0));
     /// ```
-    pub fn new(operations: u64, interval: time::Duration) -> SimpleThrottler {
+    pub fn new(operations_per_interval: u64, time_interval: time::Duration)
+        -> SimpleThrottler {
         SimpleThrottler {
-            times_: operations,
-            interval_: interval,
+            times: operations_per_interval,
+            interval: time_interval,
 
-            times_left_: operations,
-            last_interval_: time::Instant::now(),
+            times_left: operations_per_interval,
+            last_interval: time::Instant::now(),
         }
     }
 
@@ -50,14 +51,14 @@ impl SimpleThrottler {
     /// ```
     pub fn wait(&mut self) {
         let curr_interval = time::Instant::now()
-            .duration_since(self.last_interval_);
-        if curr_interval > self.interval_ {
+            .duration_since(self.last_interval);
+        if curr_interval > self.interval {
             self.restart();
-        } else if self.times_left_ == 0 {
-            thread::sleep(self.interval_ - curr_interval);
+        } else if self.times_left == 0 {
+            thread::sleep(self.interval - curr_interval);
             self.restart();
         }
-        self.times_left_ -= 1;
+        self.times_left -= 1;
     }
 
     /// Restarts the throttler completely. After calling `restart` the throttler
@@ -79,7 +80,7 @@ impl SimpleThrottler {
     /// }
     /// ```
     pub fn restart(&mut self) {
-        self.times_left_ = self.times_;
-        self.last_interval_ = time::Instant::now()
+        self.times_left = self.times;
+        self.last_interval = time::Instant::now()
     }
 }
